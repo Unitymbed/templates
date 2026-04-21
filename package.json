@@ -1,0 +1,6 @@
+{
+  "name": "@unitymbed/templates",
+  "version": "0.1.0",
+  "description": "Starter project templates for N32G MCUs",
+  "files": ["n32g031", "n32g452", "n32g455", "common"]
+}
