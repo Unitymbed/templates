@@ -1,20 +1,20 @@
 /*
  * UnityMbed starter — N32G031 (Cortex-M0, 64KB flash / 8KB RAM)
- * Blinks an LED on PA8.
+ * Blinks an LED on PB7.
  */
 #include "n32g031.h"
 
 static void delay(volatile uint32_t n) { while (n--) { __NOP(); } }
 
 int main(void) {
-    /* Enable GPIOA clock (AHBPCLKEN bit 17) */
-    RCC->AHBPCLKEN |= (1u << 17);
+    /* Enable GPIOB clock via APB2 (bit 3) */
+    RCC->APB2PCLKEN |= (1u << 3);
 
-    /* Set PA8 as output */
-    GPIO_SET_OUTPUT(GPIOA, 8);
+    /* PB7 as output */
+    GPIO_SET_OUTPUT(GPIOB, 7);
 
     while (1) {
-        GPIOA->POD ^= (1u << 8);
-        delay(500000);
+        GPIOB->POD ^= (1u << 7);
+        delay(800000);
     }
 }
