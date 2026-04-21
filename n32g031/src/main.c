@@ -7,15 +7,14 @@
 static void delay(volatile uint32_t n) { while (n--) { __NOP(); } }
 
 int main(void) {
-    /* Enable GPIOA clock */
+    /* Enable GPIOA clock (AHBPCLKEN bit 17) */
     RCC->AHBPCLKEN |= (1u << 17);
 
-    /* PA8 as output */
-    GPIOA->PL_CFG &= ~(0xFu << ((8 - 0) * 4));
-    GPIOA->PH_CFG |=  (0x1u << ((8 - 8) * 4));   /* MODE = output, 10MHz */
+    /* Set PA8 as output */
+    GPIO_SET_OUTPUT(GPIOA, 8);
 
     while (1) {
-        GPIOA->POD ^=  (1u << 8);
+        GPIOA->POD ^= (1u << 8);
         delay(500000);
     }
 }
